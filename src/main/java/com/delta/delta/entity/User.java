@@ -1,5 +1,6 @@
 package com.delta.delta.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -38,8 +39,11 @@ public class User {
     @Column(name = "following_id")
     private Set<Long> followings = new HashSet<>();
 
+
+    //ignore for test
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
     @ToString.Exclude
+    @JsonIgnoreProperties({"comments", "postLikes", "images"})
     private List<Post> posts;
 }

@@ -24,12 +24,13 @@ public class PostLike {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "post_id", nullable = false)
-    @JsonIgnoreProperties({"comments", "postLikes", "images"})
+    @JsonIgnoreProperties({"comments", "postLikes", "images", "user"})
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnoreProperties({"posts", "comments", "postLikes", "commentLikes"})
+    //follower
+    @JsonIgnoreProperties({"posts", "comments", "postLikes", "commentLikes", "followers", "followings"})
     private User user;
 
     @CreationTimestamp

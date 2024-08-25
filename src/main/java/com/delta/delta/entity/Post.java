@@ -1,5 +1,6 @@
 package com.delta.delta.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,12 +25,14 @@ public class Post {
     @Column(name = "post_id")
     private Long postId;
 
+    //backRefer
     @ManyToOne(
             fetch = FetchType.LAZY,
             optional = false
     )
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnoreProperties({"posts", "comments", "postLikes", "commentLikes"})
+    @JsonBackReference
     private User user;
 
     @Column(columnDefinition = "TEXT", nullable = false)
