@@ -1,16 +1,8 @@
-# SNS 프로젝트 backend 파트
+# kafka + zookeeper
 
-## application.properties 데이터베이스 구현 코드
-```commandline
-spring.application.name=delta
-spring.datasource.driver-class-name =com.mysql.cj.jdbc.Driver
-spring.datasource.url=jdbc:mysql://localhost:3306/DeltaDB?createDatabaseIfNotExist=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
-spring.datasource.username={id}
-spring.datasource.password={password}
-spring.jpa.hibernate.ddl-auto=update
-```
+## P1: kafkaProd + MainSvc : 8080 (:8080 -> :9092 참조) 
+## P2: kafkaConsumer + NotifySvc + dataParsed : 9292
+## P3: kafkaCluster : Zookeeper(:2181) + kafka (:9092)
+## P4: react : nginx 80:80 by ProxySvc(:443 Proxy :8080)
 
-
-
-
+### 
