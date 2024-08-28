@@ -2,7 +2,12 @@ package com.delta.delta.service;
 
 import com.delta.delta.dto.NotificationsDto;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.common.header.Header;
+import org.apache.kafka.common.header.Headers;
+import org.apache.kafka.common.header.internals.RecordHeader;
+import org.apache.kafka.common.header.internals.RecordHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -25,10 +30,15 @@ public class KafkaMessagePublisher {
         try {
             String key = String.valueOf(userId % 3);
 
+            Headers headers = new RecordHeaders();
+            headers.add("eventType-header", dto.getEventType().getBytes());
 
+            ProducerRecord<String, Object> record = new ProducerRecord<>(topicName, key, dto);
+
+            for (Header header : headers) { record.headers().add(header); }
 
             CompletableFuture<SendResult<String, Object>> future =
-                    template.send(topicName, key, dto);
+                    template.send(record);
 
 
 
