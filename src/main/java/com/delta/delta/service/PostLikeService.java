@@ -9,7 +9,7 @@ public interface PostLikeService {
 
     PostLike likePost(Long postId, Long userId);
 
-    void unlikePost(Long postLikeId);
+    Long unlikePost(Long postLikeId);
 
     List<PostLike> getLikesByPostId(Long postId);
 

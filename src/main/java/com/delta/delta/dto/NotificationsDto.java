@@ -17,12 +17,11 @@ public class NotificationsDto {
 
     private Long postId;
 
-    private Boolean isRead;
-
-
-
-
+    private String isRead;
+    private String isSent;
 }
+
+
 
 // post -> 역참조 users?
 // post -> redirect in front

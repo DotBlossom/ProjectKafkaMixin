@@ -50,10 +50,15 @@ public class PostLikeServiceImpl implements PostLikeService {
 
     @Override
     @Transactional
-    public void unlikePost(Long postLikeId) {
+    public Long unlikePost(Long postLikeId) {
         Optional<PostLike> postLikeOptional = postLikeRepository.findById(postLikeId);
+
         if (postLikeOptional.isPresent()) {
-            postLikeRepository.delete(postLikeOptional.get());
+            PostLike target = postLikeOptional.get();
+            Long postId = target.getPost().getPostId();
+            postLikeRepository.delete(target);
+
+            return postId;
         } else {
             throw new RuntimeException("해당 ID의 좋아요를 찾지 못했습니다: " + postLikeId);
         }

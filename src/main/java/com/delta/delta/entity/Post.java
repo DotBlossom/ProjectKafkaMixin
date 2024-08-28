@@ -25,13 +25,12 @@ public class Post {
     @Column(name = "post_id")
     private Long postId;
 
-    //backRefer
+    // backReference 걸어서, ignore annotation은 필요없을 것 같아 지우고 테스트 하였습니다.
     @ManyToOne(
             fetch = FetchType.LAZY,
             optional = false
     )
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnoreProperties({"posts", "comments", "postLikes", "commentLikes"})
     @JsonBackReference
     private User user;
 
